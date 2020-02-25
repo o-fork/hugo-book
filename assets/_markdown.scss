@@ -1,18 +1,30 @@
 @import 'variables';
 
 .markdown {
-  line-height: 1.6;
-
-  h1, h2, h3, h4, h5 {
-    font-weight: normal;
-    line-height: 1;
-    margin-top: 1.5em;
-    margin-bottom: $padding-16;
-  }
+  line-height: 1.6em;
 
   // remove padding at the beginning of page
   > :first-child {
     margin-top: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    line-height: 1em;
+    margin-top: 1.5em;
+    margin-bottom: $padding-16;
+  }
+
+  h4, h5, h6 {
+    font-weight: bolder;
+  }
+
+  h5 {
+    font-size: .875em;
+  }
+
+  h6 {
+    font-size: .75em;
   }
 
   b, optgroup, strong {
@@ -52,7 +64,7 @@
 
   blockquote {
     margin: $padding-16 0;
-    padding: $padding-4 ($padding-16 - $padding-4); //to keep total left space 16dp
+    padding: $padding-8 $padding-16 $padding-8 ($padding-16 - $padding-4); //to keep total left space 16dp
 
     border-left: $padding-4 solid $gray-200;
     border-radius: $border-radius;
@@ -71,7 +83,6 @@
   
     tr th, tr td {
       padding: $padding-8 $padding-16;
-      line-height: 1;
       border: $padding-1 solid $gray-200;
     }
 
@@ -91,7 +102,6 @@
   }
 
   dl {
-    // padding-left: $padding-16;
     dt {
       font-weight: bolder;
       margin-top: $padding-16;
@@ -99,6 +109,29 @@
 
     dd {
       margin-left: $padding-16 * 2;
+    }
+  }
+
+  // Special case for highlighted code with line numbers
+  .highlight table tr {
+    td:nth-child(1) pre {
+      margin: 0;
+      padding-right: 0;
+    }
+    td:nth-child(2) pre {
+      margin: 0;
+      padding-left: 0;
+    }
+  }
+
+  details {
+    padding: $padding-16;
+    border: $padding-1 solid $gray-200;
+    border-radius: $border-radius;
+
+    summary {
+      line-height: 1;
+      cursor: pointer;
     }
   }
 }

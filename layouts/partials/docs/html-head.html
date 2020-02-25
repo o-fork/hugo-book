@@ -1,18 +1,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="{{ partial "docs/title" . }}">
+{{- template "_internal/opengraph.html" . -}}
+
 <title>{{ partial "docs/title" . }} | {{ .Site.Title -}}</title>
+<link rel="icon" href="{{ "favicon.png" | relURL }}" type="image/x-icon">
 
 <!-- Theme stylesheet, you can customize scss by creating `assets/custom.scss` in your website -->
-{{- $styles := resources.Get "book.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+{{- $styles := resources.Get "book.scss" | resources.ExecuteAsTemplate "book.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
 
 {{ if default true .Site.Params.BookSearch }}
-{{- $searchJS := resources.Get "search.js" | resources.ExecuteAsTemplate "search.js" . | resources.Minify | resources.Fingerprint }}
-<script defer src="{{ $searchJS.RelPermalink }}"></script>
+{{- $searchJSFile := printf "%s.search.js" .Language.Lang -}}
+{{- $searchJS := resources.Get "search.js" | resources.ExecuteAsTemplate $searchJSFile . | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ $searchJS.RelPermalink }}" integrity="{{ $searchJS.Data.Integrity }}"></script>
 {{ end }}
 
-<!-- Favicon -->
-<link rel="icon" href="{{ "favicon.png" | relURL }}" type="image/x-icon">
+{{- template "_internal/google_analytics_async.html" . -}}
 
 <!-- RSS -->
 {{ with .OutputFormats.Get "rss" -}}

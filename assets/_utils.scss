@@ -46,6 +46,12 @@
   display: none;
 }
 
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 @mixin spin($duration) {
   animation: spin $duration ease infinite;
   @keyframes spin {
@@ -61,14 +67,4 @@
   bottom: 0;
   overflow-x: hidden;
   overflow-y: auto;
-}
-
-@mixin dark-links {
-  a {
-    color: $color-dark-link;
-  }
-
-  a.active {
-    color: $color-link;
-  }
 }
