@@ -1,0 +1,11 @@
+<script>
+var images = document.getElementsByTagName("img")
+console.info(images.length)
+for(var i=0; i<images.length; i++){
+  var image = images[i]
+  var src = image.getAttribute("src");
+  if(src.startsWith("-images")){
+    image.setAttribute("src", "../" + src)
+  }
+}
+</script>
